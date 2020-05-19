@@ -6,6 +6,9 @@ import traceback
 
 import utils
 
+# 数据是否冗余，开启后一对航线点会对应两行数据
+REDUNDANCY = False
+
 logfile = open("logfile_get_route.log", "w")
 
 def print_info(ofile, route_id, info_list):
@@ -19,7 +22,9 @@ def print_info(ofile, route_id, info_list):
              + "{:.8f}".format(info_list[j][1]).zfill(11) + "  "
              + "{:.8f}".format(info_list[j][2]).zfill(12) + " "
              + "1 10000\n"
-             )
+            )
+            if REDUNDANCY == False:
+                continue
             ofile.write("{:7s}{:7s}".format(route_id, info_list[j][0])
              + "{:.8f}".format(info_list[j][1]).zfill(11) + "  "
              + "{:.8f}".format(info_list[j][2]).zfill(12) + " "
